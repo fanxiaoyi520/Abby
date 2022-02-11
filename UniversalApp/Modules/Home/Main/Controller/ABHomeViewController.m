@@ -40,19 +40,16 @@
     self.isShowLiftBack = NO;//每个根视图需要设置该属性为NO，否则会出现导航栏异常
     
     [[ABGlobalNotifyServer sharedServer] jaf_addDelegate:self];
-    if ([[DeviceManager sharedDeviceManager].deviceModel.dps objectForKey:@"105"] != 0 &&
+    NSString *waterLevelStr = [NSString stringWithFormat:@"%@",[[DeviceManager sharedDeviceManager].deviceModel.dps objectForKey:@"105"]];
+    NSInteger waterLevelInt = ([waterLevelStr containsString:@"L"]) ? [[waterLevelStr stringByReplacingOccurrencesOfString:@"L" withString:@""] integerValue] : [waterLevelStr integerValue];
+    if (waterLevelInt != 0 &&
         [[DeviceManager sharedDeviceManager].deviceModel.dps objectForKey:@"107"] != 0) {
         //水位 水箱无水    //植物高度 植物箱体检测不到的Clone的存在
         self.view = self.guideView;
-//        self.view = self.mainHomeView;
     } else {
-        self.view = self.mainHomeView;
+//        self.view = self.mainHomeView;
+        self.view = self.guideView;
     }
-    //[self setupUI];
-}
-
-- (void)setupUI {
-    
 }
 
 // MARK: ABGuideViewDelegate
@@ -156,12 +153,12 @@
 }
 
 - (void)mainHome_StartFuncAction:(UIButton *)sender {
-
-    ABPreChangeWaterViewController *vc = [ABPreChangeWaterViewController new];
-    vc.modalPresentationStyle = UIModalPresentationCustom;
-    vc.transitioningDelegate = self;
-    vc.delegate = self;
-    [self presentViewController:vc animated:YES completion:nil];
+    sender.superview.hidden = YES;
+//    ABPreChangeWaterViewController *vc = [ABPreChangeWaterViewController new];
+//    vc.modalPresentationStyle = UIModalPresentationCustom;
+//    vc.transitioningDelegate = self;
+//    vc.delegate = self;
+//    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)mainHone_customerServiceAction:(UIButton *)sender {

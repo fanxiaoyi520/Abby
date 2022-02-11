@@ -37,7 +37,7 @@ SingletonH(Server)
 -(void)postChangeUserName:(NSString *)userName;
 -(void)postChangeUserHeaderImage:(NSString *)imageStr;
 -(void)postTuyaSmartDeviceModel:(TuyaSmartDeviceModel *)deviceModel;
--(void)postDeviceDpsUpdate:(ABDeviceDpsModel *)dpsModel;
+-(void)postDeviceDpsUpdate:(NSDictionary *)dpsModel;
 -(void)postForgetPassword:(NSString *)emailStr;
 @end
 

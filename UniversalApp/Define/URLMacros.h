@@ -36,7 +36,7 @@
 #elif TestSever
 
 /**测试服务器*/
-#define URL_main @"http://10.125.26.4:9330/abby"
+#define URL_main @"http://192.168.3.4:9330/abby"
 
 #elif ProductSever
 

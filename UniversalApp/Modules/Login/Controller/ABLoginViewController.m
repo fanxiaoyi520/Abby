@@ -137,8 +137,8 @@
         self.errTipsLab.hidden = YES;
         return;
     }
-    KPostNotification(KNotificationLoginStateChange, @(kUserLoginStatusLoggedIn));
-    return;
+//    KPostNotification(KNotificationLoginStateChange, @(kUserLoginStatusLoggedIn));
+//    return;
     [[UserManager sharedUserManager] login:kUserLoginTypePwd params:@{@"userName":self.accountTXT.text,@"password":aesEncrypt(self.passTXT.text)} completion:^(BOOL success, NSString *des) {
             if (success) {
                 [self associatedGraffitiLoginBusiness];

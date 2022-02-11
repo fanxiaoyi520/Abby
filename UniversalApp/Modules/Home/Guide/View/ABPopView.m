@@ -36,6 +36,19 @@
     self.closeBtn.hidden = isHiddenClose;
 }
 
+- (void)setSureBtnStr:(NSString *)sureBtnStr {
+    _sureBtnStr = sureBtnStr;
+    [self.startBtn setTitle:sureBtnStr forState:UIControlStateNormal];
+    CGRect startBtnRect = [sureBtnStr boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, ratioH(36)) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:FONT_MEDIUM(15)} context:nil];
+    
+    [self.startBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.mas_right).offset(-12);
+        make.bottom.mas_equalTo(-28);
+        make.width.mas_equalTo(startBtnRect.size.width+ratioW(32));
+        make.height.mas_equalTo(ratioH(36));
+    }];
+}
+
 - (void)setTitleStr:(NSString *)titleStr {
     _titleStr = titleStr;
     [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {

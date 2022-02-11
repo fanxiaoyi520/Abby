@@ -7,11 +7,13 @@
 //
 
 #import "ABMainHomeView.h"
+#import "ABPopView.h"
 
-@interface ABMainHomeView ()<ABMainHomeDelegate>
+@interface ABMainHomeView ()<ABMainHomeDelegate,ABPopViewDelegate>
 
 @property (nonatomic ,strong) UILabel *titleLab;
 @property (nonatomic ,strong) UIButton *skinBtn;
+@property (nonatomic ,strong) ABPopView  *popView;
 @end
 @implementation ABMainHomeView
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -44,6 +46,7 @@
         make.bottom.mas_equalTo(self.mas_bottom).offset(-kTabBarHeight-23);
     }];
     [self bringSubviewToFront:self.botanyView];
+    [self addSubview:self.popView];
 }
 
 // MARK: ABMainHomeDelegate
@@ -68,6 +71,13 @@
 - (void)mainHone_OxygenCollectionAction:(UITapGestureRecognizer *)tap {
     if ([self.delegate respondsToSelector:@selector(mainHone_OxygenCollectionAction:)]) {
         [self.delegate mainHone_OxygenCollectionAction:tap];
+    }
+}
+
+// MARK: ABPopViewDelegate
+- (void)startFuncAction:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(mainHome_StartFuncAction:)]) {
+        [self.delegate mainHome_StartFuncAction:sender];
     }
 }
 
@@ -125,5 +135,15 @@
         _funcView.delegate = self;
     }
     return _funcView;
+}
+
+- (ABPopView *)popView {
+    if (!_popView) {
+        _popView = [[ABPopView alloc] initWithFrame:CGRectMake(ratioW(40), kScreenHeight*149.f/812.f, ratioW(261), ratioH(130))];
+        _popView.titleStr = @"Congratulations, you have completed the 0-1 preparations, let’s enjoy the planting journey together.";
+        _popView.delegate = self;
+        _popView.sureBtnStr = @"start runing";
+    }
+    return _popView;
 }
 @end

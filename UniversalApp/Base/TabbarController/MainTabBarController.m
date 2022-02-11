@@ -87,14 +87,15 @@
 
 #pragma mark - ——————— 初始化VC ————————
 -(void)setUpAllChildViewController{
-    KPostNotification(KNotificationTabbarStateChange, @(kTabbarStatusDefault));
-//    if (([[DeviceManager sharedDeviceManager].deviceModel.dps objectForKey:@"105"] != 0 &&
-//        [[DeviceManager sharedDeviceManager].deviceModel.dps objectForKey:@"107"] != 0)) {
-//        //水位 水箱无水    //植物高度 植物箱体检测不到的Clone的存在
-//        KPostNotification(KNotificationTabbarStateChange, @(kTabbarStatusNoWaterNoPlant));
-//    } else {
-//        KPostNotification(KNotificationTabbarStateChange, @(kTabbarStatusDefault));
-//    }
+    NSString *waterLevelStr = [NSString stringWithFormat:@"%@",[[DeviceManager sharedDeviceManager].deviceModel.dps objectForKey:@"105"]];
+    NSInteger waterLevelInt = ([waterLevelStr containsString:@"L"]) ? [[waterLevelStr stringByReplacingOccurrencesOfString:@"L" withString:@""] integerValue] : [waterLevelStr integerValue];
+    if ((waterLevelInt != 0 &&
+        [[DeviceManager sharedDeviceManager].deviceModel.dps objectForKey:@"107"] != 0)) {
+        //水位 水箱无水    //植物高度 植物箱体检测不到的Clone的存在
+        KPostNotification(KNotificationTabbarStateChange, @(kTabbarStatusNoWaterNoPlant));
+    } else {
+        KPostNotification(KNotificationTabbarStateChange, @(kTabbarStatusDefault));
+    }
 }
 
 -(void)setupChildViewController:(UIViewController*)controller title:(NSString *)title imageName:(NSString *)imageName seleceImageName:(NSString *)selectImageName{

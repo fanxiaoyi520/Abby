@@ -7,9 +7,8 @@
 //
 
 #import "ABBotanyView.h"
-#import "ABPopView.h"
 
-@interface ABBotanyView ()<ABPopViewDelegate>
+@interface ABBotanyView ()
 @property (nonatomic ,strong) UIImageView *bgImageView;
 @property (nonatomic ,strong) UIImageView *plantBaseImgView;
 @property (nonatomic ,strong) UIImageView *plantImgView;
@@ -18,7 +17,6 @@
 @property (nonatomic ,strong) UIImageView *tipsImgView2;
 @property (nonatomic ,strong) UILabel *tipSplantHeightLab;
 
-@property (nonatomic ,strong) ABPopView  *popView;
 @property (nonatomic ,strong) UIView  *animationView;
 @property (nonatomic ,strong) UIButton  *customerServiceBtn;
 @end
@@ -112,7 +110,7 @@
 
 // MARK: actions
 - (void)clickPlantTipsAction:(UITapGestureRecognizer *)tap {
-//    self.popView.hidden = NO;
+
 }
 
 - (void)customerServiceBtnAction:(UIButton *)sender {
@@ -124,14 +122,6 @@
 - (void)addAnimationAction:(UITapGestureRecognizer *)tap {
     if ([self.delegate respondsToSelector:@selector(mainHone_OxygenCollectionAction:)]) {
         [self.delegate mainHone_OxygenCollectionAction:tap];
-    }
-}
-
-// MARK: ABPopViewDelegate
-- (void)startFuncAction:(UIButton *)sender {
-//    self.popView.hidden = YES;
-    if ([self.delegate respondsToSelector:@selector(mainHome_StartFuncAction:)]) {
-        [self.delegate mainHome_StartFuncAction:sender];
     }
 }
 
@@ -180,20 +170,6 @@
 
     }
     return _plantImgView;
-}
-
-- (ABPopView *)popView {
-    if (!_popView) {
-        _popView = [[ABPopView alloc] init];
-        
-        _popView.delegate = self;
-        [_popView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(24);
-            make.bottom.mas_equalTo(self.plantBaseImgView.mas_top).offset(15);
-            make.width.mas_equalTo(ratioW(261));
-        }];
-    }
-    return _popView;
 }
 
 - (UIButton *)customerServiceBtn {
