@@ -1,0 +1,21 @@
+ [
+     {
+         "title":"Humidity:",
+         "status":"Health",
+         "tips":"",
+         "perData":"45%",
+     },
+     {
+         "title":"Water:",
+         "status":"Overheat",
+         "tips":"Please turn on the Air Conditioner",
+         "perData":"98°F",
+     },
+     {
+         "title":"Temperture:",
+         "status":"Overheat",
+         "tips":"Please turn on the Air Conditioner",
+         "perData":"77°F",
+     },
+]
+

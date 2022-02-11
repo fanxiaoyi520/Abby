@@ -1,0 +1,33 @@
+ [
+    [
+        {
+            "name": "Oxygen bill",
+            "imageName": "Table_icon_o2",
+            "arrow_icon":"Table_con_more _1"
+        }
+    ],
+    [
+        {
+            "name": "Message center",
+            "imageName": "Table_icon_xinxi",
+            "arrow_icon":"Table_con_more _1"
+        }
+    ],
+    [
+        {
+            "name": "Settings",
+            "imageName": "Table_icon_set",
+            "arrow_icon":"Table_con_more _1"
+        },
+        {
+            "name": "Help & Feedback",
+            "imageName": "Table_icon_kefu",
+            "arrow_icon":"Table_con_more _1"
+        },
+        {
+            "name": "About us",
+            "imageName": "Table_icon_us",
+            "arrow_icon":"Table_con_more _1"
+        }
+    ]
+]

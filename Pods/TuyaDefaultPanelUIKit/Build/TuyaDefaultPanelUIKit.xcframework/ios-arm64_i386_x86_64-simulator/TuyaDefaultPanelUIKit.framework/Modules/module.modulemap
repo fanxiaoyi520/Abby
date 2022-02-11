@@ -1,0 +1,6 @@
+framework module TuyaDefaultPanelUIKit {
+  umbrella header "TuyaDefaultPanelUIKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

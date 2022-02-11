@@ -1,0 +1,6 @@
+framework module TuyaSmartDefaultPanelKit {
+  umbrella header "TuyaSmartDefaultPanelKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

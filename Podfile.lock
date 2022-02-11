@@ -1,0 +1,260 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - CocoaAsyncSocket (7.6.5)
+  - CocoaSecurity (1.2.4)
+  - CRBoxInputView (1.2.1):
+    - Masonry
+  - FLAnimatedImage (1.0.16)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - HUPhotoBrowser (1.4.5):
+    - SVProgressHUD
+  - IQKeyboardManager (6.5.9)
+  - JAFMultiDelegate (0.0.2)
+  - JCore (3.1.0)
+  - JPush (4.4.0):
+    - JCore (>= 2.0.0)
+  - JQFMDB (1.1.6):
+    - FMDB
+  - lottie-ios (2.5.3)
+  - Masonry (1.1.0)
+  - MBProgressHUD (1.0.0)
+  - MJRefresh (3.7.3)
+  - SDWebImage (3.8.3):
+    - SDWebImage/Core (= 3.8.3)
+  - SDWebImage/Core (3.8.3)
+  - SVProgressHUD (2.2.5)
+  - TuyaDefaultPanelUIKit (0.1.3):
+    - Masonry
+  - TuyaSmartActivatorCoreKit (3.32.6):
+    - TuyaSmartDeviceCoreKit (>= 3.32.0)
+  - TuyaSmartActivatorKit (3.32.5):
+    - TuyaSmartActivatorCoreKit
+    - TuyaSmartDeviceKit
+  - TuyaSmartBaseKit (3.32.0):
+    - TuyaSmartNetworkKit (>= 3.32.0)
+    - YYModel
+  - TuyaSmartBLECoreKit (3.32.6):
+    - TuyaSmartUtil (>= 3.32.0)
+    - TYBluetooth (< 10.0)
+    - YYModel
+  - TuyaSmartBLEKit (3.32.5):
+    - TuyaSmartBLECoreKit (>= 3.32.0)
+    - TuyaSmartDeviceCoreKit (>= 3.32.0)
+    - TYBluetooth (>= 3.32.0)
+  - TuyaSmartBLEMeshKit (3.32.5):
+    - TuyaSmartActivatorCoreKit (>= 3.32.0)
+    - TuyaSmartBLEKit (>= 3.32.0)
+    - TuyaSmartDeviceCoreKit (>= 3.32.0)
+  - TuyaSmartDefaultPanelKit (2.0.4):
+    - TuyaDefaultPanelUIKit
+    - TuyaSmartDeviceCoreKit
+  - TuyaSmartDeviceCoreKit (3.32.6):
+    - TuyaSmartBaseKit (>= 3.32.0)
+    - TuyaSmartMQTTChannelKit (>= 3.32.0)
+    - TuyaSmartSocketChannelKit (>= 3.32.0)
+    - TuyaSmartUtil (>= 3.32.0)
+  - TuyaSmartDeviceKit (3.32.7):
+    - TuyaSmartBaseKit
+    - TuyaSmartDeviceCoreKit (>= 3.32.0-rc1)
+    - TuyaSmartShareKit
+  - TuyaSmartFeedbackKit (3.33.5):
+    - TuyaSmartBaseKit
+  - TuyaSmartHomeKit (3.32.5):
+    - TuyaDefaultPanelUIKit (~> 0.1.0)
+    - TuyaSmartActivatorCoreKit (~> 3.32.0)
+    - TuyaSmartActivatorKit (~> 3.32.0)
+    - TuyaSmartBaseKit (~> 3.32.0)
+    - TuyaSmartBLECoreKit (~> 3.32.0)
+    - TuyaSmartBLEKit (~> 3.32.0)
+    - TuyaSmartBLEMeshKit (~> 3.32.0)
+    - TuyaSmartDefaultPanelKit (~> 2.0.0)
+    - TuyaSmartDeviceCoreKit (~> 3.32.0)
+    - TuyaSmartDeviceKit (~> 3.32.0)
+    - TuyaSmartFeedbackKit (~> 3.33.0)
+    - TuyaSmartMessageKit (~> 3.33.0)
+    - TuyaSmartMQTTChannelKit (~> 3.32.0)
+    - TuyaSmartNetworkKit (~> 3.32.0)
+    - TuyaSmartQUIC (~> 1.2.0)
+    - TuyaSmartSceneKit (~> 3.32.0)
+    - TuyaSmartShareKit (~> 1.3.0)
+    - TuyaSmartSocketChannelKit (~> 3.32.0)
+    - TuyaSmartTimerKit (~> 3.32.0)
+    - TuyaSmartUtil (~> 3.32.0)
+    - TYBluetooth (~> 3.32.0)
+  - TuyaSmartMessageKit (3.33.5):
+    - TuyaSmartBaseKit
+  - TuyaSmartMQTTChannelKit (3.32.0):
+    - TuyaSmartNetworkKit (>= 3.32.0)
+    - TuyaSmartQUIC (>= 1.1.4)
+  - TuyaSmartNetworkKit (3.32.6):
+    - TuyaSmartUtil (>= 3.32.0)
+    - YYModel
+  - TuyaSmartQUIC (1.2.0)
+  - TuyaSmartSceneKit (3.32.5):
+    - TuyaSmartBaseKit
+    - TuyaSmartDeviceCoreKit
+    - TuyaSmartDeviceKit
+  - TuyaSmartShareKit (1.3.1):
+    - TuyaSmartBaseKit
+  - TuyaSmartSocketChannelKit (3.32.2):
+    - CocoaAsyncSocket (>= 7.4.3)
+    - TuyaSmartUtil (>= 3.32.0)
+  - TuyaSmartTimerKit (3.32.6):
+    - TuyaSmartBaseKit
+    - TuyaSmartDeviceCoreKit
+  - TuyaSmartUtil (3.32.5)
+  - TYBluetooth (3.32.5):
+    - TuyaSmartUtil (>= 3.32.0)
+  - UMAPM (1.5.4)
+  - UMCCommonLog (2.0.2)
+  - UMCommon (7.3.5):
+    - UMDevice
+  - UMDevice (2.0.5)
+  - YTKNetwork (2.1.4):
+    - AFNetworking/NSURLSession (~> 3.0)
+  - YYModel (1.0.4)
+  - ZYGCDTimer (1.0.0)
+
+DEPENDENCIES:
+  - AFNetworking (~> 3.2.1)
+  - CocoaSecurity
+  - CRBoxInputView (= 1.2.1)
+  - FLAnimatedImage
+  - HUPhotoBrowser
+  - IQKeyboardManager (~> 6.5.6)
+  - JAFMultiDelegate
+  - JCore
+  - JPush
+  - JQFMDB
+  - lottie-ios (~> 2.5.3)
+  - Masonry
+  - MBProgressHUD (~> 1.0.0)
+  - MJRefresh
+  - SDWebImage
+  - TuyaSmartHomeKit
+  - UMAPM
+  - UMCCommonLog
+  - UMCommon
+  - UMDevice
+  - YTKNetwork
+  - YYModel
+  - ZYGCDTimer
+
+SPEC REPOS:
+  trunk:
+    - AFNetworking
+    - CocoaAsyncSocket
+    - CocoaSecurity
+    - CRBoxInputView
+    - FLAnimatedImage
+    - FMDB
+    - HUPhotoBrowser
+    - IQKeyboardManager
+    - JAFMultiDelegate
+    - JCore
+    - JPush
+    - JQFMDB
+    - lottie-ios
+    - Masonry
+    - MBProgressHUD
+    - MJRefresh
+    - SDWebImage
+    - SVProgressHUD
+    - TuyaDefaultPanelUIKit
+    - TuyaSmartActivatorCoreKit
+    - TuyaSmartActivatorKit
+    - TuyaSmartBaseKit
+    - TuyaSmartBLECoreKit
+    - TuyaSmartBLEKit
+    - TuyaSmartBLEMeshKit
+    - TuyaSmartDefaultPanelKit
+    - TuyaSmartDeviceCoreKit
+    - TuyaSmartDeviceKit
+    - TuyaSmartFeedbackKit
+    - TuyaSmartHomeKit
+    - TuyaSmartMessageKit
+    - TuyaSmartMQTTChannelKit
+    - TuyaSmartNetworkKit
+    - TuyaSmartQUIC
+    - TuyaSmartSceneKit
+    - TuyaSmartShareKit
+    - TuyaSmartSocketChannelKit
+    - TuyaSmartTimerKit
+    - TuyaSmartUtil
+    - TYBluetooth
+    - UMAPM
+    - UMCCommonLog
+    - UMCommon
+    - UMDevice
+    - YTKNetwork
+    - YYModel
+    - ZYGCDTimer
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
+  CocoaSecurity: d288a6f87e0f363823d2cb83e753814a6944f71a
+  CRBoxInputView: d73a630e5326ee70487b4a56d09daebf915d82fd
+  FLAnimatedImage: 8f3e854ebf9680b71f0b6e700939687fc4d82b4b
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  HUPhotoBrowser: 87a8333c111a4e71ebf5400bf66d0eeb522c0098
+  IQKeyboardManager: 241cc94ccabc9deb8f8bd7d12f00d73288d13ecc
+  JAFMultiDelegate: 8051ba203bf6e677b0719f7985bbfc2da5bc98f0
+  JCore: 4029befb2497adc36b2496e2cfd6b24d9f671784
+  JPush: b7d00f2cc78766e76c8abb30a5741fe94d21e5bc
+  JQFMDB: 39ab0d6d7c26fd30e51c4dd92edcb27506a34c3a
+  lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  MJRefresh: ec9c53ff4abf3a9237b4283862f1bd51c2ee3fdb
+  SDWebImage: a72e880a8fe0f7fc31efe15aaed443c074d2a80c
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  TuyaDefaultPanelUIKit: 8effb6fa45dc5f827ecc87a94a0d491ef0604f8c
+  TuyaSmartActivatorCoreKit: 72d1ece572508e76d45b864c18811add14e82196
+  TuyaSmartActivatorKit: cd697fc10965589743a88c6117e804306b03e140
+  TuyaSmartBaseKit: 552023a2272c433deb2c4fa8d539c2cfdb4cb30a
+  TuyaSmartBLECoreKit: 1741fa66b4facbb8425ec8418eed1ef6f9589323
+  TuyaSmartBLEKit: 5f881f93cc2bcf70e75b737a26b0a94dbb2e780a
+  TuyaSmartBLEMeshKit: ccbff8f32ec4945ad0c9ac76e10ffbdd848f61d5
+  TuyaSmartDefaultPanelKit: 77d9d7a286920b140cd3fb8525d17d20b941450d
+  TuyaSmartDeviceCoreKit: 5bd0334620eb15d251f0e44427d1f2aea772c280
+  TuyaSmartDeviceKit: 493a1a7fe5e20329356e1f4fc0e6a0e82ba70fb6
+  TuyaSmartFeedbackKit: eb12d0767b9f09c6f765fbffa6e06e7f89ce9a90
+  TuyaSmartHomeKit: 4b7c9037c39dffb9d18ca2b6acb5bea888e5848d
+  TuyaSmartMessageKit: 21383406bc813526731505cef2a8968039b0c28c
+  TuyaSmartMQTTChannelKit: 83dd5057d8f32436b079588c049a2038a590c025
+  TuyaSmartNetworkKit: e7c68d843938385592ecb584103543891741e8d6
+  TuyaSmartQUIC: fc6d0cc6123734c8268f8c1354697203c8b16a82
+  TuyaSmartSceneKit: d083d4cd6a479446c89d72a693908b66edc1fc43
+  TuyaSmartShareKit: 8eb4baabd8b526e2679cf7c14eab2fba40a4a8b6
+  TuyaSmartSocketChannelKit: 828a8709595b44ef0b0c634335ad3913e81c5cf1
+  TuyaSmartTimerKit: 5b90e97f63f30a666f34811cdc330eb0b77ff80b
+  TuyaSmartUtil: 2e39e5fefd117767c7b2a4d8e2333afca1072170
+  TYBluetooth: bf4098f0c5a4ca276292cb029a5398fd59c6ffb2
+  UMAPM: 48f09b31c41cd5d1f58052246a17aca2949f996e
+  UMCCommonLog: bea707e50c85cef4b0eb47cc5c7226bb843245ca
+  UMCommon: ab4d875ddefe1b06c60b577e4a58bc4d433ee067
+  UMDevice: c13bbb2e8ca6c67d1e23e03162553e3ec5a8b5b0
+  YTKNetwork: 19be749c30f0512ada07180f4637b4b67bc8ddc2
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+  ZYGCDTimer: 12629306940bd8edc456568478213a9f21abfe2d
+
+PODFILE CHECKSUM: bc7612a8211ec9be3419e5c2db78192125d6b8b9
+
+COCOAPODS: 1.11.2

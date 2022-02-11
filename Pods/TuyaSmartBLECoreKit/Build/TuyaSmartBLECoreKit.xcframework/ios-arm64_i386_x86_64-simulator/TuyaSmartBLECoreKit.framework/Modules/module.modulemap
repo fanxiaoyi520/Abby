@@ -1,0 +1,6 @@
+framework module TuyaSmartBLECoreKit {
+  umbrella header "TuyaSmartBLECoreKit.h"
+
+  export *
+  module * { export * }
+}

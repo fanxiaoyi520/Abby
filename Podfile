@@ -1,0 +1,27 @@
+platform :ios, '9.0'
+target 'UniversalApp' do
+pod 'MJRefresh'
+pod 'MBProgressHUD', '~> 1.0.0'
+pod 'YTKNetwork'
+pod 'SDWebImage'
+pod 'IQKeyboardManager','~> 6.5.6'
+pod 'lottie-ios','~> 2.5.3'
+pod "TuyaSmartHomeKit"
+pod 'AFNetworking','~> 3.2.1'
+pod 'YYModel'
+pod 'ZYGCDTimer'
+pod 'JAFMultiDelegate'
+pod 'FLAnimatedImage'
+pod 'UMCommon'
+pod 'UMDevice'
+pod 'UMAPM' 
+pod 'UMCCommonLog'
+pod 'Masonry'
+pod 'JQFMDB'
+pod 'CRBoxInputView', '1.2.1'
+pod 'CocoaSecurity'
+pod 'JCore'
+pod 'JPush'
+pod 'HUPhotoBrowser' 
+end
+

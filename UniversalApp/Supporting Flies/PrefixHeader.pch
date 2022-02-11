@@ -1,0 +1,121 @@
+//
+//  PrefixHeader.pch
+//  MiAiApp
+//
+//  Created by 徐阳 on 2017/5/18.
+//  Copyright © 2017年 徐阳. All rights reserved.
+//
+//
+//                            _ooOoo_
+//                           o8888888o
+//                           88" . "88
+//                           (| -_- |)
+//                            O\ = /O
+//                        ____/`---'\____
+//                      .   ' \\| |// `.
+//                       / \\||| : |||// \
+//                     / _||||| -:- |||||- \
+//                       | | \\\ - /// | |
+//                     | \_| ''\---/'' | |
+//                      \ .-\__ `-` ___/-. /
+//                   ___`. .' /--.--\ `. . __
+//                ."" '< `.___\_<|>_/___.' >'"".
+//               | | : `- \`.;`\ _ /`;.`/ - ` : | |
+//                 \ \ `-. \_ __\ /__ _/ .-` / /
+//         ======`-.____`-.___\_____/___.-`____.-'======
+//                            `=---='
+//
+//         .............................................
+//                  佛祖镇楼                  BUG辟易
+//          佛曰:
+//                  写字楼里写字间，写字间里程序员；
+//                  程序人员写程序，又拿程序换酒钱。
+//                  酒醒只在网上坐，酒醉还来网下眠；
+//                  酒醉酒醒日复日，网上网下年复年。
+//                  但愿老死电脑间，不愿鞠躬老板前；
+//                  奔驰宝马贵者趣，公交自行程序员。
+//                  别人笑我忒疯癫，我笑自己命太贱；
+//                  不见满街漂亮妹，哪个归得程序员？
+
+//#ifdef __OBJC__
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+//全局宏
+#import "UtilsMacros.h"
+#import "URLMacros.h"
+#import "FontAndColorMacros.h"
+#import "ThirdMacros.h"
+#import "CommonMacros.h"
+#import "URLWebMacro.h"
+
+// MARK: 第三方
+#import <YYModel/YYModel.h>
+#import <MBProgressHUD.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import <lottie/LOTAnimationView.h>
+#import <TuyaSmartHomeKit/TuyaSmartKit.h>
+#import <TuyaSmartActivatorKit/TuyaSmartActivatorKit.h>
+#import <ZYGCDTimer.h>
+#import <JAFMultiDelegate/JAFMultiProxy.h>
+#import <MJRefresh.h>
+#import <HelpDesk/HelpDesk.h>
+#import "HelpDeskUI.h"
+#import <UMCommon/UMCommon.h>
+#import <UMCommonLog/UMCommonLogHeaders.h>
+#import <Masonry.h>
+#import <JQFMDB/JQFMDB.h>
+#import <CocoaSecurity/CocoaSecurity.h>
+#import <FLAnimatedImage/FLAnimatedImageView.h>
+#import <FLAnimatedImage/FLAnimatedImage.h>
+#import "JPUSHService.h"
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
+#import <HUPhotoBrowser/HUPhotoBrowser.h>
+
+
+//全局代理or模块代理
+#import "ABGuideDelegate.h"
+#import "ABGlobalNotifyServer.h"
+#import "ABGlobalDelegate.h"
+#import "ABMainHomeDelegate.h"
+#import "ABLoginInterface.h"
+#import "ABMineInterface.h"
+
+//基础类
+#import "AppDelegate.h"
+#import "AppDelegate+AppService.h"
+#import "RootViewController.h"
+#import "RootNavigationController.h"
+#import "MBProgressHUD+XY.h"
+#import "PPNetworkHelper.h"
+#import "AppManager.h"
+#import "ShareManager.h"
+#import "UserManager.h"
+#import "IMManager.h"
+#import "UIButton+XYButton.h"
+#import "NSString+Common.h"
+#import "UIViewController+Common.h"
+#import "UIView+Common.h"
+#import "YYKit.h"
+#import "UIAlertController+Color.h"
+#import "ABUtils.h"
+#import "UILabel+Common.h"
+#import "BaseTableViewCell.h"
+#import "MWPhotoBrowser.h"
+#import "UIButton+Common.h"
+#import "NSArray+Sudoku.h"
+#import "TYBLEAdvModel+Common.h"
+#import "DeviceManager.h"
+#import "UIImage+Common.h"
+#import "AESCipher.h"
+#import "ABRotationGestureRecognizer.h"
+#import "XLWebViewController.h"
+#import "XHLaunchAd.h"
+#import "NewPagedFlowView.h"
+#import "PGIndexBannerSubiew.h"
+#import "XHVersion.h"
+
+#endif /* PrefixHeader_pch */
+//#endif
