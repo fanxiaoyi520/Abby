@@ -14,9 +14,17 @@
 
 @property (nonatomic, strong) YSLDraggableCardContainer *container;
 @property (nonatomic, strong) NSMutableArray *datas;
+@property (nonatomic, strong) NSTimer *countTimer;
+@property (nonatomic, assign) int count;
+@property (nonatomic, strong) UILabel *tipsLab;
+@property (nonatomic, strong) UIButton *changeWaterBtn;
 @end
 
+static int const showtime = 5;
 @implementation ABChangeWaterViewController
+- (void)dealloc {
+    [self dismiss];
+}
 
 - (void)viewDidLoad {
     [self superConfigure];
@@ -24,6 +32,15 @@
     // Do any additional setup after loading the view.
     
     [self setupUI];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[deviceManager getDevice] publishDps:@{@"113": @(NO)} mode:TYDevicePublishModeLocal success:^{
+        NSLog(@"publishDps success");
+    } failure:^(NSError *error) {
+        NSLog(@"publishDps failure: %@", error);
+    }];
 }
 
 - (void)superConfigure {
@@ -38,7 +55,7 @@
     self.contentLab.hidden = YES;
     self.sureBtn.hidden = YES;
     _container = [[YSLDraggableCardContainer alloc]init];
-    _container.frame = CGRectMake(0, 68, kScreenWidth, self.bgView.height-68);
+    _container.frame = CGRectMake(0, 68, kScreenWidth, self.bgView.height-68-(self.bgView.bottom-self.sureBtn.top));
     _container.backgroundColor = [UIColor clearColor];
     _container.dataSource = self;
     _container.delegate = self;
@@ -54,7 +71,8 @@
     tipsLab.textColor = [UIColor colorWithHexString:@"0x161B19"];
     tipsLab.textAlignment = NSTextAlignmentCenter;
     tipsLab.frame = CGRectMake(26, 518, kScreenWidth-26*2, 22);
-    tipsLab.text = @"Click the button below to drain";
+    tipsLab.text = [NSString stringWithFormat:@"%d/%ds", showtime,showtime];
+    self.tipsLab = tipsLab;
     
     UIButton *changeWaterBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.bgView insertSubview:changeWaterBtn aboveSubview:_container];
@@ -62,7 +80,10 @@
     [changeWaterBtn setImage:ImageName(@"icon_stop") forState:UIControlStateSelected];
     [changeWaterBtn addTarget:self action:@selector(changeWaterAction:) forControlEvents:UIControlEventTouchUpInside];
     changeWaterBtn.frame = CGRectMake((kScreenWidth-90)/2, tipsLab.bottom+24, 90, 90);
-    changeWaterBtn.selected = NO;
+    changeWaterBtn.selected = YES;
+    self.changeWaterBtn = changeWaterBtn;
+
+    [self show];
 }
 
 - (void)loadData
@@ -76,14 +97,97 @@
     }
 }
 
+// MARK: 倒计时
+- (void)countDown
+{
+    _count --;
+    self.tipsLab.text = [NSString stringWithFormat:@"%d/%ds", _count,showtime];
+    if (_count <= 0) {
+        self.tipsLab.hidden = YES;
+        self.sureBtn.hidden = NO;
+        self.changeWaterBtn.hidden = YES;
+        [self dismiss];
+    }
+}
+
+- (void)show
+{
+    // 倒计时方法1：GCD
+    //    [self startCoundown];
+    
+    // 倒计时方法2：定时器
+    if (showtime<=0) {
+        return;
+    }
+    [self startTimer];
+}
+
+// 定时器倒计时
+- (void)startTimer
+{
+    _count = showtime;
+    [[NSRunLoop mainRunLoop] addTimer:self.countTimer forMode:NSRunLoopCommonModes];
+}
+
+- (NSTimer *)countTimer
+{
+    if (!_countTimer) {
+        _countTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
+    }
+    return _countTimer;
+}
+
+// GCD倒计时
+- (void)startCoundown
+{
+    __block int timeout = showtime + 1; //倒计时时间 + 1
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0 * NSEC_PER_SEC, 0); //每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        if(timeout <= 0){ //倒计时结束，关闭
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self dismiss];
+                
+            });
+        }else{
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.tipsLab.text = [NSString stringWithFormat:@"%d/%ds", timeout,showtime];
+            });
+            timeout--;
+        }
+    });
+    dispatch_resume(_timer);
+}
+
+- (void)dismiss
+{
+    [self.countTimer invalidate];
+    self.countTimer = nil;
+}
+
 // MARK: actions
 - (void)sureBtnFuncAction:(UIButton *)sender {
-    
+    [self dismissViewControllerAnimated:YES completion:^{
+        if ([self.delegate respondsToSelector:@selector(changeWater_sureBtn:)]) {
+            [self.delegate changeWater_sureBtn:sender];
+        }
+    }];
 }
 
 - (void)changeWaterAction:(UIButton *)sender {
+    
     sender.selected = !sender.selected;
     BOOL isChangeWater = sender.selected ? YES : NO;
+    if (!sender.selected) {
+        [self.countTimer setFireDate:[NSDate distantFuture]];
+    } else {
+        [self.countTimer setFireDate:[NSDate date]];
+    }
+    
     DLog(@"%d",isChangeWater);
     [[deviceManager getDevice] publishDps:@{@"113": @(isChangeWater)} mode:TYDevicePublishModeLocal success:^{
         NSLog(@"publishDps success");

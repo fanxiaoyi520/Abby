@@ -88,6 +88,18 @@
     }
 }
 
+- (void)updatePopViewContentWithDic:(NSDictionary *)dic {
+    self.popView.hidden = NO;
+    NSString *content = [dic objectForKey:@"content"];
+    NSString *btnStr = [dic objectForKey:@"btnStr"];
+    NSArray *btnStrArray = [dic objectForKey:@"btnStrArray"];
+    
+    self.popView.titleStr = ValidStr(content) ? content : nil;
+    self.popView.sureBtnStr = ValidStr(btnStr) ? btnStr : nil;
+    self.popView.btnStrArray = ValidArray(btnStrArray) ? btnStrArray : nil;
+    self.popView.isHiddenOrther = NO;
+}
+
 // MARK: Lazy loading
 - (UILabel *)titleLab {
     if (!_titleLab) {
@@ -143,6 +155,7 @@
         _popView.titleStr = @"Congratulations, you have completed the 0-1 preparations, let’s enjoy the planting journey together.";
         _popView.delegate = self;
         _popView.sureBtnStr = @"start runing";
+        _popView.hidden = YES;
     }
     return _popView;
 }

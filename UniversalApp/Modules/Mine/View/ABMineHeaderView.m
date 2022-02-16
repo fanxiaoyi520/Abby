@@ -7,7 +7,7 @@
 //
 
 #import "ABMineHeaderView.h"
-#import "NickNameLbel.h"
+
 @interface ABMineHeaderView()
 @property(nonatomic, strong) UIImageView *bgImgView; //背景图
 @property(nonatomic, strong) UIButton *bgBtn; //背景btn

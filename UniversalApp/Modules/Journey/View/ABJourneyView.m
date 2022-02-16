@@ -95,11 +95,10 @@ static NSString * const reuseIdentifier = @"HomeCaseCellID";
 }
 
 -(void)loadData{
-    NSArray *array = [NSArray arrayWithObjects:@"img1",@"img2",@"img3",@"img4", nil];
     self.caseArray = [NSMutableArray array];
     ///加四次为了循环
-    for (int i=0; i<3; i++) {
-        [self.caseArray addObjectsFromArray:array];
+    for (int i=0; i<12; i++) {
+        [self.caseArray addObject:[NSString stringWithFormat:@"pic_plant_%d_L",i+1]];
     }
     [self.collectionView reloadData];
     [self.collectionView layoutIfNeeded];

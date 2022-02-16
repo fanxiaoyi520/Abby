@@ -8,7 +8,6 @@
 
 #import "AppDelegate+AppService.h"
 //#import <UMSocialCore/UMSocialCore.h>
-#import "LoginViewController.h"
 #import "ABLoginViewController.h"
 #import "ABAddDeviceViewController.h"
 #import "OpenUDID.h"
@@ -17,7 +16,7 @@
 @implementation AppDelegate (AppService)
 
 
-#pragma mark ————— 初始化服务 —————
+// MARK:  ————— 初始化服务 —————
 -(void)initService{
     //注册登录状态监听
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -32,7 +31,7 @@
                                                object:nil];
 }
 
-#pragma mark ————— 初始化window —————
+// MARK:  ————— 初始化window —————
 -(void)initWindow{
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
@@ -41,20 +40,20 @@
     self.window.backgroundColor = KWhiteColor;
     [self.window makeKeyAndVisible];
     [[UIButton appearance] setExclusiveTouch:YES];
-//    [[UIButton appearance] setShowsTouchWhenHighlighted:YES];
-    [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = KWhiteColor;
+
+    [UIActivityIndicatorView appearanceWhenContainedInInstancesOfClasses:[NSArray arrayWithObjects:[MBProgressHUD class], nil]].color = KWhiteColor;
     if (@available(iOS 11.0, *)){
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }
 }
 
-#pragma mark ————— 初始化网络配置 —————
+// MARK:  ————— 初始化网络配置 —————
 -(void)NetWorkConfig{
     YTKNetworkConfig *config = [YTKNetworkConfig sharedConfig];
     config.baseUrl = URL_main;
 }
 
-#pragma mark ————— 初始化用户系统 —————
+// MARK:  ————— 初始化用户系统 —————
 -(void)initUserManager{
     KPostNotification(KNotificationLoginStateChange, kUserLoginStatusNotLoggedIn)
 //    DLog(@"设备IMEI ：%@",[OpenUDID value]);
@@ -82,7 +81,7 @@
 //    }
 }
 
-#pragma mark ————— 登录状态处理 —————
+// MARK:  ————— 登录状态处理 —————
 - (void)loginStateChange:(NSNotification *)notification
 {
 
@@ -129,7 +128,7 @@
 }
 
 
-#pragma mark ————— 网络状态变化 —————
+// MARK: ————— 网络状态变化 —————
 - (void)netWorkStateChange:(NSNotification *)notification
 {
     BOOL isNetWork = [notification.object boolValue];
@@ -153,7 +152,7 @@
 }
 
 
-#pragma mark ————— 友盟 初始化 —————
+// MARK:  ————— 友盟 初始化 —————
 -(void)initUMeng{
     [UMConfigure initWithAppkey:UMengKey channel:@"App Store"];
     //开发者需要显式的调用此函数，日志系统才能工作
@@ -168,7 +167,7 @@
 //    [self configUSharePlatforms];
 }
 
-#pragma mark  ————— 涂鸦智能  —————
+// MARK: ————— 涂鸦智能  —————
 - (void)initTuyaSmartSDK {
     [[TuyaSmartSDK sharedInstance] startWithAppKey:@"yh7srnnmgydfvue4sj5p" secretKey:@"4hpshu7yn7tsxw54cv7xnypecpkwarsy"];
 #ifdef DEBUG
@@ -177,8 +176,9 @@
 #endif
 }
 
-#pragma mark  ————— 创建极光推送  —————
--(void)initAuroraPush:(NSDictionary *)launchOptions  {
+// MARK: ————— 创建极光推送  —————
+-(void)initAuroraPush:(NSDictionary *)launchOptions withBlock:(void (^)(JPUSHRegisterEntity *entity,PKPushRegistry *voipRegistry))block  {
+    //-------------添加初始化 APNs 代码-------------
     //Required
     //notice: 3.0.0 及以后版本注册可以这样写，也可以继续用之前的注册方式
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -186,14 +186,15 @@
         entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound|JPAuthorizationOptionProvidesAppNotificationSettings;
     } else {
         // Fallback on earlier versions
+        entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
     }
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
       // 可以添加自定义 categories
       // NSSet<UNNotificationCategory *> *categories for iOS10 or later
       // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
     }
-    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
     
+    //-------------添加初始化 JPush 代码-------------
     // Required
     // init Push
     // notice: 2.1.5 版本的 SDK 新增的注册方法，改成可上报 IDFA，如果没有使用 IDFA 直接传 nil
@@ -201,60 +202,23 @@
                           channel:@"App Store"
                  apsForProduction:0
             advertisingIdentifier:nil];
+    
+    // 添加Voip权限
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    PKPushRegistry *voipRegistry = [[PKPushRegistry alloc] initWithQueue:mainQueue];
+    voipRegistry.delegate = self;
+    // Set the push type to VoIP
+    voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
+    block(entity,voipRegistry);
 }
 
-#pragma mark ————— 配置第三方 —————
-//-(void)configUSharePlatforms{
-//    /* 设置微信的appKey和appSecret */
-//    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:kAppKey_Wechat appSecret:kSecret_Wechat redirectURL:nil];
-//    /*
-//     * 移除相应平台的分享，如微信收藏
-//     */
-//    //[[UMSocialManager defaultManager] removePlatformProviderWithPlatformTypes:@[@(UMSocialPlatformType_WechatFavorite)]];
-//
-//    /* 设置分享到QQ互联的appID
-//     * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
-//     */
-//    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:kAppKey_Tencent/*设置QQ平台的appID*/  appSecret:nil redirectURL:nil];
-//}
+// MARK:  ————— 配置第三方 —————
 
-#pragma mark ————— OpenURL 回调 —————
-//// 支持所有iOS系统。注：此方法是老方法，建议同时实现 application:openURL:options: 若APP不支持iOS9以下，可直接废弃当前，直接使用application:openURL:options:
-//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-//{
-//    //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
-//    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
-//    if (!result) {
-//        // 其他如支付等SDK的回调
-//    }
-//    return result;
-//}
+// MARK:  ————— OpenURL 回调 —————
 
-//// NOTE: 9.0以后使用新API接口
-//- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
-//{
-//    //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
-//    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url options:options];
-//    if (!result) {
-//        // 其他如支付等SDK的回调
-//        if ([url.host isEqualToString:@"safepay"]) {
-//            //跳转支付宝钱包进行支付，处理支付结果
-////            [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-////                NSLog(@"result = %@",resultDic);
-////            }];
-//            return YES;
-//        }
-////        if  ([OpenInstallSDK handLinkURL:url]){
-////            return YES;
-////        }
-////        //微信支付
-////        return [WXApi handleOpenURL:url delegate:[PayManager sharedPayManager]];
-//    }
-//    return result;
-//}
-#pragma mark —————创建数据库—————
+// MARK:  —————创建数据库—————
 -(void)initDB {
-    JQFMDB *db = [JQFMDB shareDatabase:DBName_DPS];
+    [JQFMDB shareDatabase:DBName_DPS];
 }
 
 #pragma mark ————— 网络状态监听 —————
@@ -283,13 +247,12 @@
         }
         
     }];
-    
 }
 
+// MARK: 单利
 + (AppDelegate *)shareAppDelegate{
     return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
-
 
 -(UIViewController *)getCurrentVC{
     
@@ -339,49 +302,6 @@
             return ((UINavigationController*)superVC).viewControllers.lastObject;
         }
     return superVC;
-}
-
-// MARK: - JPUSHRegisterDelegate
-// iOS 12 Support
-- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center openSettingsForNotification:(UNNotification *)notification{
-  if (notification && [notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-    //从通知界面直接进入应用
-  }else{
-    //从通知设置界面进入应用
-  }
-}
-
-// iOS 10 Support
-- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
-  // Required
-  NSDictionary * userInfo = notification.request.content.userInfo;
-  if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-    [JPUSHService handleRemoteNotification:userInfo];
-  }
-  completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有 Badge、Sound、Alert 三种类型可以选择设置
-}
-
-// iOS 10 Support
-- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
-  // Required
-  NSDictionary * userInfo = response.notification.request.content.userInfo;
-  if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-    [JPUSHService handleRemoteNotification:userInfo];
-  }
-  completionHandler();  // 系统要求执行这个方法
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-
-  // Required, iOS 7 Support
-  [JPUSHService handleRemoteNotification:userInfo];
-  completionHandler(UIBackgroundFetchResultNewData);
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-
-  // Required, For systems with less than or equal to iOS 6
-  [JPUSHService handleRemoteNotification:userInfo];
 }
 
 @end

@@ -69,7 +69,7 @@
 
 // MARK: actions
 - (void)rightBtnClick:(UIButton *)btn {
-    [UIViewController jaf_showHudTip:@"h5"];
+    [[IMManager sharedIMManager] IMGoChatVC:self withServiceNumberType:ServiceNumber_Default];
 }
 
 - (void)sureBtnAction:(UIButton *)sender {

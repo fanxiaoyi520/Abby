@@ -20,7 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,copy) NSString *titleStr;
 @property (nonatomic ,copy) NSString *sureBtnStr;
 @property (nonatomic ,assign) BOOL isHiddenClose;
+@property (nonatomic ,assign) BOOL isHiddenOrther;
+@property (nonatomic ,assign) BOOL isHiddenSure;
 @property (nonatomic ,assign) NSInteger sureTag;
+@property (nonatomic ,strong) NSArray <NSString *> *btnStrArray;
 
 @end
 

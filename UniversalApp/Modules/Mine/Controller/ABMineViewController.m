@@ -8,8 +8,6 @@
 
 #import "ABMineViewController.h"
 
-#import "ProfileViewController.h"
-#import "SettingViewController.h"
 #import "XYTransitionProtocol.h"
 
 #import "ABOxygenBillViewController.h"
@@ -208,7 +206,7 @@
 }
 // MARK: ————— 切换账号 —————
 -(void)changeUser{
-    SettingViewController *settingVC = [SettingViewController new];
+    ABSettingsViewController *settingVC = [ABSettingsViewController new];
     [self.navigationController pushViewController:settingVC animated:YES];
 }
 

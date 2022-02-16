@@ -26,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
     NSArray *array = [NSArray arrayWithObjects:@"hour_tus_dd",@"hour_tus_dd",@"hour_tus_dd",@"hour_tus_dd", nil];
     for (int i=0; i<3; i++) {
         [self.imageArray addObjectsFromArray:array];

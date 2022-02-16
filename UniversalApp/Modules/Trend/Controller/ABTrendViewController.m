@@ -11,6 +11,7 @@
 #import "ABPlantDataViewController.h"
 #import "ABReportViewController.h"
 #import "ABMyJournalViewController.h"
+#import "ABShareViewController.h"
 
 #import "ABTrendCell.h"
 #import "ABTrendLogic.h"
@@ -115,7 +116,15 @@
 // MARK: ABTrendCellFuncDelegate
 - (void)trend_LikeAction:(UIButton *)sender{DLog(@"1")}
 - (void)trend_giftAction:(UIButton *)sender{DLog(@"1")}
-- (void)trend_downloadAction:(UIButton *)sender{DLog(@"1")}
+
+- (void)trend_downloadAction:(UIButton *)sender{
+
+    ABShareViewController *vc = ABShareViewController.new;
+    vc.modalPresentationStyle = UIModalPresentationCustom;
+    vc.transitioningDelegate = self;
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
 - (void)trend_moreAction:(UIButton *)sender {
     CustomPopOverView *view = [CustomPopOverView popOverView];
     self.popOverView = view;

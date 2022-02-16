@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 压缩图片方法
 + (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize;
++ (UIImage *)getCurrentScrollviewShot:(UIScrollView *) scrollview;
 @end
 
 NS_ASSUME_NONNULL_END

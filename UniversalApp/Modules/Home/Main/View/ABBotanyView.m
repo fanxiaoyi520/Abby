@@ -161,6 +161,8 @@
         _plantImgView = [UIImageView new];
         _plantImgView.userInteractionEnabled = YES;
         [self.bgImageView addSubview:_plantImgView];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        [_plantImgView addGestureRecognizer:tap];
         [_plantImgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.bgImageView);
             make.bottom.mas_equalTo(self.plantBaseImgView.mas_top);
@@ -170,6 +172,22 @@
 
     }
     return _plantImgView;
+}
+
+- (void)tapAction:(UITapGestureRecognizer *)tap {
+    UIImageView *imgView = (UIImageView *)tap.view;
+    CABasicAnimation *animationScale = [CABasicAnimation       animationWithKeyPath:@"transform.scale"];
+    animationScale.duration = 1;
+    animationScale.repeatCount = 1;
+    animationScale.fromValue = @0.9;
+    animationScale.toValue = @1.0;
+    animationScale.removedOnCompletion = NO;
+    //animationScale.delegate = self;
+    CGRect frame = imgView.frame;
+    /*定点缩放的位置 锚点 如果（0,0）就是从左上角缩放，如果 (1,1)就是从右下角 */
+    imgView.layer.anchorPoint = CGPointMake(0.5, 0.5);
+    imgView.frame = frame;
+   [imgView.layer addAnimation:animationScale forKey:@"scale-show-layer"];
 }
 
 - (UIButton *)customerServiceBtn {

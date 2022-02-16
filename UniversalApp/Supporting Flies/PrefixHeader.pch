@@ -86,6 +86,7 @@
 //基础类
 #import "AppDelegate.h"
 #import "AppDelegate+AppService.h"
+#import "AppDelegate+PushService.h"
 #import "RootViewController.h"
 #import "RootNavigationController.h"
 #import "MBProgressHUD+XY.h"

@@ -40,7 +40,9 @@
     [self initService];
     
     //创建极光推送
-    [self initAuroraPush:launchOptions];
+    [self initAuroraPush:launchOptions withBlock:^(JPUSHRegisterEntity *entity, PKPushRegistry *voipRegistry) {
+        [self auroraPushDelegate:entity withRegi:voipRegistry];
+    }];
     
     //初始化IM
     [[IMManager sharedIMManager] initIM];
@@ -54,13 +56,6 @@
     //广告页
     [AppManager appStart];
 
-    
-    // 添加Voip权限
-    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-    PKPushRegistry *voipRegistry = [[PKPushRegistry alloc] initWithQueue:mainQueue];
-    voipRegistry.delegate = self;
-    // Set the push type to VoIP
-    voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
     return YES;
 }
 
@@ -89,21 +84,4 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
-
-// MARK: - PKPushRegistryDelegate
-/// 系统返回VoipToken,上报给极光服务器
-- (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)pushCredentials forType:(PKPushType)type{
-    [JPUSHService registerVoipToken:pushCredentials.token];
-}
-
-- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type{
-  // 提交回执给极光服务器
-  [JPUSHService handleVoipNotification:payload.dictionaryPayload];
-}
-
-- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type withCompletionHandler:(void(^)(void))completion{
-  // 提交回执给极光服务器
-  [JPUSHService handleVoipNotification:payload.dictionaryPayload];
-}
 @end

@@ -9,9 +9,14 @@
 #import "BaseModalPopUpViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol ABChangeWaterDelegate <NSObject>
 
+- (void)changeWater_sureBtn:(UIButton *)sender;
+
+@end
 @interface ABChangeWaterViewController : BaseModalPopUpViewController
 
+@property (nonatomic ,weak) id <ABChangeWaterDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -13,7 +13,7 @@
 /**
  包含第三方 和 应用内业务的实现，减轻入口代码压力
  */
-@interface AppDelegate (AppService)<JPUSHRegisterDelegate>
+@interface AppDelegate (AppService)
 
 //初始化服务
 -(void)initService;
@@ -38,7 +38,7 @@
 -(void)initDB;
 
 //创建极光推送
--(void)initAuroraPush:(NSDictionary *)launchOptions ;
+-(void)initAuroraPush:(NSDictionary *)launchOptions withBlock:(void (^)(JPUSHRegisterEntity *entity,PKPushRegistry *voipRegistry))block;
 
 
 //单例

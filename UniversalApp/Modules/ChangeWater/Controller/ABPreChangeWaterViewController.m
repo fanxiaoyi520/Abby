@@ -8,7 +8,7 @@
 
 #import "ABPreChangeWaterViewController.h"
 #import "ABChangeWaterViewController.h"
-@interface ABPreChangeWaterViewController ()
+@interface ABPreChangeWaterViewController ()<ABChangeWaterDelegate>
 @property (nonatomic ,strong) LOTAnimationView *lottieLogo;
 @end
 
@@ -33,30 +33,47 @@
 }
 
 - (void)superConfigure {
-    self.bg_Height = 484;
+    self.bg_Height = 486;
     self.btn_bg_Color = @"0x006241";
-    self.content_Str = @"Find a bucket that can hold 1 1/2 gallons of water and place the tube into the bucket.";
-    self.btn_Title = @"Tube placed in bucket";
+    self.content_Str = @"Please prepare a bucket with a volume of 1 liter or more.";
+    self.btn_Title = @"Confirm";
     self.isLeft = NO;
 }
 
 - (void)setupUI {
-    self.lottieLogo.frame = CGRectMake(26, self.contentLab.bottom+48, kScreenWidth-26*2, 200);
+    self.lottieLogo.frame = CGRectMake(26, 0, kScreenWidth-26*2, 200);
+    self.lottieLogo.bottom = self.sureBtn.top - 40;
 }
 
 // MARK: actions
 - (void)sureBtnFuncAction:(UIButton *)sender {
-    ABChangeWaterViewController *vc = [ABChangeWaterViewController new];
-    vc.modalPresentationStyle = UIModalPresentationCustom;
-    vc.transitioningDelegate = self;
-//        vc.delegate = self;
-    [self presentViewController:vc animated:YES completion:nil];
+    if ([sender.titleLabel.text isEqualToString:@"Confirm"]) {
+        self.contentLab.text = @"Click the button below to drain";
+        [sender setTitle:@"Start" forState:UIControlStateNormal];
+        return;
+    }
+    
+    [[deviceManager getDevice] publishDps:@{@"113": @(YES)} mode:TYDevicePublishModeLocal success:^{
+        ABChangeWaterViewController *vc = [ABChangeWaterViewController new];
+        vc.modalPresentationStyle = UIModalPresentationCustom;
+        vc.transitioningDelegate = self;
+        vc.delegate = self;
+        [self presentViewController:vc animated:YES completion:nil];
+    } failure:^(NSError *error) {
+        NSLog(@"publishDps failure: %@", error);
+    }];
+
+}
+
+// MARK: ABChangeWaterDelegate
+- (void)changeWater_sureBtn:(UIButton *)sender {
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 // MARK: Lazy loding
 - (LOTAnimationView *)lottieLogo {
     if (!_lottieLogo) {
-        _lottieLogo = [LOTAnimationView animationNamed:@"85819-kadokado-heart"];
+        _lottieLogo = [LOTAnimationView animationNamed:@"drainage"];
         _lottieLogo.contentMode = UIViewContentModeScaleAspectFill;
         _lottieLogo.loopAnimation = YES;
         [self.bgView addSubview:self.lottieLogo];

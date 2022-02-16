@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,strong) ABBotanyView *botanyView;
 @property (nonatomic ,strong) ABFuncView *funcView;
 @property (nonatomic ,weak) id<ABMainHomeDelegate> delegate;
+
+//@{@"content":@"",@"btnStr":@""}
+//@{@"content":@"",@"btnStrArray":[@"",@""]}
+- (void)updatePopViewContentWithDic:(NSDictionary *)dic;
 @end
 
 NS_ASSUME_NONNULL_END

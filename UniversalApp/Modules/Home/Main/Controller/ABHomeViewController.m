@@ -121,6 +121,7 @@
 
 - (void)guide_guideSecondAction:(UIButton *)sender {
     self.view = self.mainHomeView;
+    [self.mainHomeView updatePopViewContentWithDic:@{@"content":@"On day 18, trim leaves as necessary",@"btnStrArray":@[@"Ok",@"learn more"]}];
 }
 
 // MARK: ABMainHomeDelegate
@@ -145,15 +146,19 @@
         vc.delegate = self;
         [self presentViewController:vc animated:YES completion:nil];
     }
-//    [[deviceManager getDevice] publishDps:@{@"108": @(YES)} mode:TYDevicePublishModeLocal success:^{
-//        NSLog(@"publishDps success");
-//    } failure:^(NSError *error) {
-//        NSLog(@"publishDps failure: %@", error);
-//    }];
 }
 
 - (void)mainHome_StartFuncAction:(UIButton *)sender {
     sender.superview.hidden = YES;
+    if (sender.tag == 100 && [sender.titleLabel.text isEqualToString:@"Ok"]) {
+        [[deviceManager getDevice] publishDps:@{@"1": @(YES)} mode:TYDevicePublishModeLocal success:^{
+            DLog(@"publishDps success");
+        } failure:^(NSError *error) {
+            DLog(@"publishDps failure: %@", error);
+        }];
+    }
+
+
 //    ABPreChangeWaterViewController *vc = [ABPreChangeWaterViewController new];
 //    vc.modalPresentationStyle = UIModalPresentationCustom;
 //    vc.transitioningDelegate = self;
@@ -181,8 +186,8 @@
 }
 
 // MARK: GWGlobalNotifyServerDelegate
-- (void)resetDeviceDps:(ABDeviceDpsModel *)dpsModel {
-    DLog(@"%@",dpsModel.height);
+- (void)resetDeviceDps:(NSDictionary *)dpsModel {
+    DLog(@"%@",dpsModel);
 }
 
 // MARK: Lazy loading

@@ -72,7 +72,7 @@
     [weakself.homeManager getHomeListWithSuccess:^(NSArray<TuyaSmartHomeModel *> *homes) {
         if (homes.count > 0) weakself.smartHomeModel = homes[0];
         //ValidStr(self.PWD)? self.PWD : @"baypacclub"
-        [[TuyaSmartBLEWifiActivator sharedInstance] startConfigBLEWifiDeviceWithUUID:weakself.peripheral.uuid homeId:weakself.smartHomeModel.homeId productId:weakself.peripheral.productId ssid:[NSString getDeviceConnectWifiName] password:@"baypacclub"  timeout:100 success:^{
+        [[TuyaSmartBLEWifiActivator sharedInstance] startConfigBLEWifiDeviceWithUUID:weakself.peripheral.uuid homeId:weakself.smartHomeModel.homeId productId:weakself.peripheral.productId ssid:[NSString getDeviceConnectWifiName] password:@"ABby@2022.com"  timeout:100 success:^{
         } failure:^{
             [self updateUIwithInfo:@"Device failed to connect to the network"];
         }];

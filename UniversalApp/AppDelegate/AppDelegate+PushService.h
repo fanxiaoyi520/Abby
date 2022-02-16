@@ -11,6 +11,7 @@
 /**
  推送相关在这里处理
  */
-@interface AppDelegate (PushService)
+@interface AppDelegate (PushService)<JPUSHRegisterDelegate,PKPushRegistryDelegate>
 
+- (void)auroraPushDelegate:(JPUSHRegisterEntity *)entity withRegi:(PKPushRegistry *)voipRegistry;
 @end
